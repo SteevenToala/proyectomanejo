@@ -1,6 +1,6 @@
 <?php
 // acciones.php
-include 'funciones.php';
+include 'functions.php';
 
 // Crear usuario
 if (isset($_POST['crear_usuario'])) {
