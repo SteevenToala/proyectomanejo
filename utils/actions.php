@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Redirigir para que se actualice la página y se vea el mensaje
-
+        header("Location: index.php");
         exit();
     }
 }
