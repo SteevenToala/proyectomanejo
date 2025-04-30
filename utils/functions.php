@@ -1,64 +1,141 @@
 <?php
-// funciones.php
 include 'conexion.php';
 
-// Función para crear un usuario
-function crearUsuario($nombre, $correo, $contrasena, $rol) {
+// Crear usuario
+function crearUsuario($nombre, $correo, $contrasena, $rol)
+{
     global $conexion;
-    $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT); // Encriptar la contraseña
-    $query = "INSERT INTO usuarios (nombre, correo, contrasena, rol) VALUES ('$nombre', '$correo', '$contrasenaHash', '$rol')";
-    return $conexion->query($query);
+    $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
+    $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contrasena, rol) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nombre, $correo, $contrasenaHash, $rol);
+
+    try {
+        $stmt->execute();
+        return ["success" => true];
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() == 1062) {
+            return ["success" => false, "error" => "El correo ya está registrado."];
+        } else {
+            return ["success" => false, "error" => "Error al crear usuario: " . $e->getMessage()];
+        }
+    }
 }
 
-// Función para obtener todos los usuarios
-function obtenerUsuarios() {
+// Obtener todos los usuarios
+function obtenerUsuarios()
+{
     global $conexion;
-    $query = "SELECT * FROM usuarios";
-    $resultado = $conexion->query($query);
-    return $resultado->fetch_all(MYSQLI_ASSOC); // Devuelve los resultados en un array asociativo
+    $resultado = $conexion->query("SELECT * FROM usuarios");
+    return $resultado->fetch_all(MYSQLI_ASSOC);
 }
 
-// Función para obtener un usuario por ID
-function obtenerUsuarioPorId($id) {
+// Obtener usuario por ID
+function obtenerUsuarioPorId($id)
+{
     global $conexion;
-    $query = "SELECT * FROM usuarios WHERE id = $id";
-    $resultado = $conexion->query($query);
-    return $resultado->fetch_assoc(); // Devuelve un solo resultado
+    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_assoc();
 }
 
-// Función para actualizar un usuario
-function actualizarUsuario($id, $nombre, $correo, $rol) {
+// Actualizar usuario
+function actualizarUsuario($id, $nombre, $correo, $rol)
+{
     global $conexion;
-    $query = "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', rol = '$rol' WHERE id = $id";
-    return $conexion->query($query);
+    $stmt = $conexion->prepare("UPDATE usuarios SET nombre = ?, correo = ?, rol = ? WHERE id = ?");
+    $stmt->bind_param("sssi", $nombre, $correo, $rol, $id);
+
+    try {
+        $stmt->execute();
+        return ["success" => true];
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() == 1062) {
+            return ["success" => false, "error" => "El correo ya está registrado."];
+        } else {
+            return ["success" => false, "error" => "Error al actualizar usuario: " . $e->getMessage()];
+        }
+    }
 }
 
-// Función para eliminar un usuario
-function eliminarUsuario($id) {
+// Eliminar usuario
+function eliminarUsuario($id)
+{
     global $conexion;
-    $query = "DELETE FROM usuarios WHERE id = $id";
-    return $conexion->query($query);
+
+    // Eliminar primero las solicitudes asociadas a este usuario
+    $stmt = $conexion->prepare("DELETE FROM solicitudes WHERE id_usuario = ?");
+    $stmt->bind_param("i", $id);
+    try {
+        $stmt->execute();
+
+        // Luego, eliminar el usuario
+        $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        return ["success" => true];
+    } catch (mysqli_sql_exception $e) {
+        return ["success" => false, "error" => "Error al eliminar usuario: " . $e->getMessage()];
+    }
 }
 
-// Función para crear una solicitud
-function crearSolicitud($id_usuario) {
+
+
+// Crear solicitud
+function crearSolicitud($id_usuario)
+{
     global $conexion;
-    $query = "INSERT INTO solicitudes (id_usuario) VALUES ($id_usuario)";
-    return $conexion->query($query);
+
+    // Verificar si ya existe una solicitud para este usuario
+    $stmt = $conexion->prepare("SELECT COUNT(*) FROM solicitudes WHERE id_usuario = ? AND estado = 'pendiente'");
+    $stmt->bind_param("i", $id_usuario);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->free_result(); 
+
+    if ($count > 0) {
+        // Si ya existe una solicitud pendiente, no permitir crear otra
+        return ["success" => false, "error" => "Ya has enviado una solicitud pendiente."];
+    }
+
+    // Si no existe, crear la solicitud
+    $stmt = $conexion->prepare("INSERT INTO solicitudes (id_usuario, estado) VALUES (?, 'pendiente')");
+    $stmt->bind_param("i", $id_usuario);
+
+    try {
+        $stmt->execute();
+        return ["success" => true];
+    } catch (mysqli_sql_exception $e) {
+        return ["success" => false, "error" => "Error al crear solicitud: " . $e->getMessage()];
+    }
 }
 
-// Función para obtener todas las solicitudes
-function obtenerSolicitudes() {
+
+
+
+// Obtener solicitudes
+function obtenerSolicitudes()
+{
     global $conexion;
-    $query = "SELECT * FROM solicitudes";
-    $resultado = $conexion->query($query);
-    return $resultado->fetch_all(MYSQLI_ASSOC); // Devuelve los resultados en un array asociativo
+    $resultado = $conexion->query("SELECT * FROM solicitudes");
+    return $resultado->fetch_all(MYSQLI_ASSOC);
 }
 
-// Función para aprobar o rechazar una solicitud
-function actualizarEstadoSolicitud($id, $estado) {
+// Actualizar estado de solicitud
+function actualizarEstadoSolicitud($id, $estado)
+{
     global $conexion;
-    $query = "UPDATE solicitudes SET estado = '$estado' WHERE id = $id";
-    return $conexion->query($query);
+    $stmt = $conexion->prepare("UPDATE solicitudes SET estado = ? WHERE id = ?");
+    $stmt->bind_param("si", $estado, $id);
+
+    try {
+        $stmt->execute();
+        return ["success" => true];
+    } catch (mysqli_sql_exception $e) {
+        return ["success" => false, "error" => "Error al actualizar estado: " . $e->getMessage()];
+    }
 }
-?>
