@@ -1,3 +1,5 @@
+let solicitudesData = []; // Variable global para almacenar las solicitudes
+
 function cargarSolicitudes() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost/proyectomanejo/utils/actions.php?obtener_solicitudes=1', true);
@@ -6,7 +8,9 @@ function cargarSolicitudes() {
         if (xhr.status === 200) {
             try {
                 const data = JSON.parse(xhr.responseText);
-                console.log('Solicitudes cargadas:', data); 
+                solicitudesData = data.data;
+                mostrarSolicitudes();
+                console.log('Solicitudes cargadas:', data.data); 
             } catch (e) {
                 console.error('Error al parsear JSON:', e.message);
             }
@@ -22,4 +26,32 @@ function cargarSolicitudes() {
     xhr.send();
 }
 
-cargarSolicitudes()
+
+// Función que recorre el array de solicitudes y las agrega al HTML
+function mostrarSolicitudes() {
+    const solicitudesContainer = document.getElementById('solicitudes-container');
+    solicitudesContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar las nuevas solicitudes
+
+    // Recorrer el array de solicitudes y agregar cada una al HTML
+    solicitudesData.forEach((solicitud, index) => {
+        const solicitudElement = document.createElement('div');
+        solicitudElement.classList.add('card', 'card-solicitud', 'mb-3', 'p-3', 'd-flex', 'flex-md-row', 'justify-content-between', 'align-items-center');
+
+        solicitudElement.innerHTML = `
+            <div><strong>SOLICITUD #${index + 1}</strong></div>
+            <select class="form-select w-auto" data-id="${solicitud.id}">
+                <option value="pendiente" ${solicitud.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                <option value="aprobado" ${solicitud.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
+                <option value="rechazado" ${solicitud.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
+            </select>
+        `;
+        
+        solicitudesContainer.appendChild(solicitudElement);
+    });
+}
+
+// Llamar a la función para cargar las solicitudes al cargar la página
+window.onload = function() {
+    cargarSolicitudes();
+};
+

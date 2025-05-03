@@ -42,35 +42,7 @@
     <div class="bg-white p-4 rounded shadow-sm">
       <h5 class="mb-3">Lista de Solicitudes</h5>
 
-      <!-- Solicitud 1 -->
-      <div class="card card-solicitud mb-3 p-3 d-flex flex-md-row justify-content-between align-items-center">
-        <div><strong>SOLICITUD #1</strong></div>
-        <select class="form-select w-auto">
-          <option value="pendiente">Pendiente</option>
-          <option value="aprobado">Aprobado</option>
-          <option value="rechazado">Rechazado</option>
-        </select>
-      </div>
-
-      <!-- Solicitud 2 -->
-      <div class="card card-solicitud mb-3 p-3 d-flex flex-md-row justify-content-between align-items-center">
-        <div><strong>SOLICITUD #2</strong></div>
-        <select class="form-select w-auto">
-          <option value="pendiente">Pendiente</option>
-          <option value="aprobado">Aprobado</option>
-          <option value="rechazado">Rechazado</option>
-        </select>
-      </div>
-
-      <!-- Solicitud 3 -->
-      <div class="card card-solicitud mb-3 p-3 d-flex flex-md-row justify-content-between align-items-center">
-        <div><strong>SOLICITUD #3</strong></div>
-        <select class="form-select w-auto">
-          <option value="pendiente">Pendiente</option>
-          <option value="aprobado">Aprobado</option>
-          <option value="rechazado">Rechazado</option>
-        </select>
-      </div>
+      <div id="solicitudes-container"></div>
 
       <!-- Botón guardar -->
       <div class="text-end mt-4">
