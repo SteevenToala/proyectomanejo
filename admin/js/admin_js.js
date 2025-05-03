@@ -10,7 +10,6 @@ function cargarSolicitudes() {
                 const data = JSON.parse(xhr.responseText);
                 solicitudesData = data.data;
                 mostrarSolicitudes();
-                console.log('Solicitudes cargadas:', data.data); 
             } catch (e) {
                 console.error('Error al parsear JSON:', e.message);
             }
@@ -58,10 +57,12 @@ const botonesModificar = document.querySelectorAll('.btn-modificar');
 botonesModificar.forEach(boton => {
     boton.addEventListener('click', function () {
         const idSolicitud = this.getAttribute('data-id');
-        console.log('ID de la solicitud a modificar:', idSolicitud);
-        // Aquí puedes agregar la lógica para modificar la solicitud si lo deseas
+        const select = this.previousElementSibling;
+        const nuevoEstado = select.value;
+        actualizarEstadoSolicitud(idSolicitud, nuevoEstado);
     });
 });
+
 
 
 }
@@ -72,3 +73,22 @@ window.onload = function() {
 };
 
 
+function actualizarEstadoSolicitud(id, nuevoEstado) {
+    const formData = new FormData();
+    formData.append('actualizar_estado', '1');
+    formData.append('id', id);
+    formData.append('estado', nuevoEstado.toLowerCase());
+
+    fetch('http://localhost/proyectomanejo/utils/actions.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text()) // Si esperas JSON, usa .json()
+    .then(result => {
+        alert('Estado actualizado con éxito.');
+    })
+    .catch(error => {
+        console.error('Error al actualizar el estado:', error);
+        alert('Hubo un error al actualizar el estado.');
+    });
+}
