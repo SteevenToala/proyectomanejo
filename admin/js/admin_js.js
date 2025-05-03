@@ -38,20 +38,37 @@ function mostrarSolicitudes() {
         solicitudElement.classList.add('card', 'card-solicitud', 'mb-3', 'p-3', 'd-flex', 'flex-md-row', 'justify-content-between', 'align-items-center');
 
         solicitudElement.innerHTML = `
-            <div><strong>SOLICITUD #${index + 1}</strong></div>
-            <select class="form-select w-auto" data-id="${solicitud.id}">
-                <option value="pendiente" ${solicitud.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
-                <option value="aprobado" ${solicitud.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
-                <option value="rechazado" ${solicitud.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
-            </select>
-        `;
+            <div><strong>Solicitud del usuario ${solicitud.nombre}</strong></div>
+            <div class="d-flex align-items-center gap-2">
+                <select class="form-select w-auto" data-id="${solicitud.id}">
+                    <option value="pendiente" ${solicitud.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                    <option value="aprobado" ${solicitud.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
+                    <option value="rechazado" ${solicitud.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
+                </select>
+                <button class="btn btn-primary btn-modificar" data-id="${solicitud.id}">Modificar</button>
+            </div>
+            `;
         
         solicitudesContainer.appendChild(solicitudElement);
     });
+
+
+    // Agregar eventos a los botones "Modificar"
+const botonesModificar = document.querySelectorAll('.btn-modificar');
+botonesModificar.forEach(boton => {
+    boton.addEventListener('click', function () {
+        const idSolicitud = this.getAttribute('data-id');
+        console.log('ID de la solicitud a modificar:', idSolicitud);
+        // Aquí puedes agregar la lógica para modificar la solicitud si lo deseas
+    });
+});
+
+
 }
 
 // Llamar a la función para cargar las solicitudes al cargar la página
 window.onload = function() {
     cargarSolicitudes();
 };
+
 
