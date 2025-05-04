@@ -2,6 +2,18 @@
 session_start();
 include 'functions.php';
 
+// Bloque API GET: Obtener solicitudes
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['obtener_solicitudes'])) {
+    header('Content-Type: application/json');
+
+    $solicitudes = obtenerSolicitudes();
+
+    echo json_encode([
+        'success' => true,
+        'data' => $solicitudes
+    ]);
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Crear usuario
