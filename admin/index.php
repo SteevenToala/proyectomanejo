@@ -44,7 +44,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="dropdown ms-auto">
       <div class="profile-img dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false"></div>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item text-danger" href="../">Salir</a></li>
+      <li><a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a></li>      
       </ul>
     </div>
   </nav>
