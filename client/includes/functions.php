@@ -1,5 +1,5 @@
 <?php
-require_once '../utils/conexion.php';
+require_once '../../utils/conexion.php';
 
 function crearSolicitud($usuario_id) {
     global $conexion;
