@@ -1,6 +1,6 @@
 // Función para crear solicitud vía AJAX
 function crearSolicitud(usuarioId) {
-    fetch('../client/pages/crear_solicitud_api.php', {
+    fetch('../pages/crear_solicitud_api.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({usuario_id: usuarioId})
