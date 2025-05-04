@@ -1,5 +1,5 @@
 <?php
-require_once '../client/includes/functions.php';
+require_once '../includes/functions.php';
 
 // Simular usuario logueado
 $usuario_id = 1;
@@ -16,12 +16,12 @@ $usuario_id = 1;
     <button id="btnSolicitar">Solicitar participación</button>
     <p id="mensaje"></p>
 
-    <a href="../client/index.php">Volver</a>
+    <a href="../index.php">Volver</a>
 
     <script>
         // Pasar variable PHP a JS
         const usuarioId = <?php echo json_encode($usuario_id); ?>;
     </script>
-    <script src="../client/js/solicitudes.js"></script>
+    <script src="../js/solicitudes.js"></script>
 </body>
 </html>
