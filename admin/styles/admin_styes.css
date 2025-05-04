@@ -1,99 +1,394 @@
-/* ===== Fondo general del body ===== */
+/* ===== VARIABLES GLOBALES ===== */
+:root {
+  --primary: #9c27b0;
+  --primary-hover: #ba68c8;
+  --secondary: #00bcd4;
+  --dark: #121212;
+  --light: #ffffff;
+  --glass: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ===== RESET Y ESTILOS BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    margin: 0;
-    padding-top: 64px; /* Espacio para la navbar fija */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fff !important;
-    box-sizing: border-box;
-  }
-  
-  /* ===== NAVBAR traslúcida y sin margen extra ===== */
+  margin: 0;
+  padding-top: 80px;
+  background: linear-gradient(135deg, 
+              rgba(0, 0, 0, 0.85), 
+              rgba(0, 0, 0, 0.95)),
+              url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920') center/cover fixed no-repeat;
+  color: var(--light);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR FUTURISTA ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0.8rem 2rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0.5rem 2rem;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand i {
+  margin-right: 10px;
+  font-size: 1.8rem;
+}
+
+.nav-link {
+  color: var(--light) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary) !important;
+  transform: translateY(-2px);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
+}
+
+.nav-link:hover::after {
+  width: 70%;
+}
+
+/* ===== PROFILE IMAGE CON EFECTO NEÓN ===== */
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  box-shadow: 0 0 10px rgba(156, 39, 176, 0);
+}
+
+.profile-img:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+  transform: scale(1.1);
+}
+
+/* ===== DROPDOWN MENU ESTILIZADO ===== */
+.dropdown-menu {
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+  padding: 0.5rem 0;
+  margin-top: 10px !important;
+}
+
+.dropdown-item {
+  color: var(--light);
+  padding: 0.5rem 1.5rem;
+  transition: var(--transition);
+}
+
+.dropdown-item:hover {
+  background: rgba(156, 39, 176, 0.2);
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+.dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== CONTENEDOR PRINCIPAL CON GLASSMORPHISM ===== */
+.bg-white {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  color: var(--light);
+  padding: 2rem;
+  transition: var(--transition);
+  margin-bottom: 2rem;
+}
+
+.bg-white:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== BOTÓN CUSTOM CON EFECTO NEÓN ===== */
+.btn-custom {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+}
+
+.btn-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--secondary), var(--primary));
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.btn-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.6);
+}
+
+.btn-custom:hover::before {
+  opacity: 1;
+}
+
+/* ===== TARJETA DE SOLICITUD CON EFECTO 3D ===== */
+.card-solicitud {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--dark);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-solicitud::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  transition: var(--transition);
+}
+
+.card-solicitud:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-solicitud:hover::before {
+  width: 8px;
+}
+
+/* ===== LISTA CON EFECTO DE LUZ ===== */
+.lista {
+  background: linear-gradient(90deg, 
+              rgba(156, 39, 176, 0.2), 
+              rgba(0, 188, 212, 0.2));
+  padding: 1.2rem 2rem;
+  border-left: 6px solid var(--primary);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: var(--light);
+  margin-bottom: 2rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.lista::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: var(--transition);
+}
+
+.lista:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.lista:hover::after {
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: rotate(30deg) translate(-30%, -30%); }
+  100% { transform: rotate(30deg) translate(30%, 30%); }
+}
+
+.lista h5 {
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== EFECTO DE PARTICULAS (OPCIONAL) ===== */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 992px) {
   .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    margin: 0;
+    padding: 0.8rem 1rem;
   }
   
-  /* Imagen de perfil */
-  .profile-img {
-    width: 40px;
-    height: 40px;
-    background-color: #999;
-    border-radius: 50%;
-    cursor: pointer;
-    object-fit: cover;
-    display: inline-block;
+  .nav-link {
+    margin: 0.3rem 0;
+    padding: 0.8rem 1rem !important;
   }
   
-  /* ===== Menú desplegable de cerrar sesión ===== */
-  .dropdown-menu {
-    z-index: 1050; /* Asegura que se muestre por encima */
-  }
-  
-  /* ===== Estilo de contenedor principal ===== */
   .bg-white {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    color: #fff;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px;
   }
   
-  /* ===== Botón personalizado (opcional) ===== */
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+  
   .btn-custom {
-    background-color: #ccd0d5;
-    color: white;
-    border-radius: 8px;
-    padding: 0.5rem 1.2rem;
-    transition: all 0.3s ease;
-  }
-  .btn-custom:hover {
-    background-color: #dde0e4;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 0.7rem 1.5rem;
   }
   
-  /* ===== Tarjeta de solicitud ===== */
   .card-solicitud {
-    background-color: rgba(255, 255, 255, 0.85);
-    color: #333;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
-  .card-solicitud:hover {
-    transform: scale(1.02);
+    padding: 1.2rem;
   }
   
-  /* ===== Título de la lista de solicitudes ===== */
   .lista {
-    background-color: rgba(255, 255, 255, 0.12);
     padding: 1rem 1.5rem;
-    border-left: 4px solid #0d6efd;
-    border-radius: 12px;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    color: #fff;
-    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .profile-img {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .bg-white {
+    padding: 1.2rem;
+    border-radius: 14px;
   }
   
   .lista h5 {
-    font-weight: 600;
-    margin: 0;
+    font-size: 1.2rem;
   }
-  
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--secondary));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
