@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
   <head>
@@ -179,13 +182,14 @@
     include 'includes/menu.php';
   ?>
 
-  <main class="px-3">
-    <h1>Avifest</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
-  </main>
+<main class="px-3">
+  <h1>Avifest Ambato 2025</h1>
+  <p class="lead">¡Prepárate para vivir la experiencia musical más vibrante del año en la ciudad de Ambato! Avifest 2025 reúne a artistas nacionales e internacionales en un solo escenario, con luces, sonido y energía inolvidables.</p>
+  <p class="lead">
+    <a href="./pages/detalles.php" class="btn btn-lg btn-light fw-bold border-white bg-white">Ver Detalles</a>
+  </p>
+</main>
+
 
   <footer class="mt-auto text-white-50">
     <p>Desarrollado por<a href="https://getbootstrap.com/" class="text-white">Avifest</a>, @Copyright<a href="https://x.com/mdo" class="text-white">@AvifestSistemas</a>.</p>
