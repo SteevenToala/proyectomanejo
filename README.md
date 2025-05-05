@@ -26,11 +26,9 @@ Los usuarios pueden registrarse y enviar una solicitud para participar en el eve
 - **Frontend**:
   - `client/pages/login.php`
   - `client/pages/register.php`
-  - `client/pages/forgot_password.php`
 - **Backend**:
   - Validación de usuarios
   - Manejo de sesiones
-  - Envío de correos para recuperación de contraseña
   - Carpeta: `utils/`
 
 ---
@@ -49,11 +47,10 @@ Los usuarios pueden registrarse y enviar una solicitud para participar en el eve
 ### 🛠️ Persona 3 – Admin
 - **Archivos**:
   - `admin/index.php`
-  - `admin/pages/` (gestión de solicitudes y usuarios)
+  - `admin/pages/` (gestión de solicitudes)
   - `admin/includes/`
 - **Funcionalidad**:
   - Aprobar o rechazar solicitudes
-  - Gestionar usuarios (opcional)
 
 ---
 
@@ -61,7 +58,7 @@ Los usuarios pueden registrarse y enviar una solicitud para participar en el eve
 - **Archivos**:
   - `styles/`, `cover.css`, `assets/`, `client/styles/`, `admin/styles/`
 - **Responsabilidades**:
-  - Crear un diseño coherente y responsive
+  - Crear un diseño coherente
   - Agregar imágenes, íconos, fuentes
 
 ---
