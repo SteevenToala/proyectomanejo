@@ -121,7 +121,7 @@ function crearSolicitud($id_usuario)
 function obtenerSolicitudes()
 {
     global $conexion;
-    $resultado = $conexion->query("SELECT * FROM solicitudes");
+    $resultado = $conexion->query("SELECT s.id,s.estado,s.fecha_solicitud,s.id_usuario,u.nombre FROM solicitudes s INNER JOIN usuarios u ON s.id_usuario=u.id;");
     return $resultado->fetch_all(MYSQLI_ASSOC);
 }
 
