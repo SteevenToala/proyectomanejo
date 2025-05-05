@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+require_once 'conexion.php';
 
 // Crear usuario
 function crearUsuario($nombre, $correo, $contrasena, $rol)
