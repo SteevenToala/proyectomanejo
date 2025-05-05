@@ -1,0 +1,27 @@
+# Archivos sensibles de entorno
+.env
+.env.*
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Caché de PHP
+*.cache
+*.tmp
+
+# Directorios comunes que no deberían estar en el repo
+/vendor/              # Si usas Composer
+/node_modules/        # Si usas npm/yarn para herramientas front-end
+/dist/                # Archivos generados automáticamente
+/build/
+coverage/             # Reportes de tests
+.idea/                # Configuración de PHPStorm/WebStorm
+.vscode/              # Configuración de VSCode
+
+# Archivos específicos de configuración local
+*.sublime-workspace
+*.sublime-project
