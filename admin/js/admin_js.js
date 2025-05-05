@@ -31,6 +31,8 @@ function mostrarSolicitudes() {
     const solicitudesContainer = document.getElementById('solicitudes-container');
     solicitudesContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar las nuevas solicitudes
 
+
+
     // Recorrer el array de solicitudes y agregar cada una al HTML
     solicitudesData.forEach((solicitud, index) => {
         const solicitudElement = document.createElement('div');
@@ -92,3 +94,4 @@ function actualizarEstadoSolicitud(id, nuevoEstado) {
         alert('Hubo un error al actualizar el estado.');
     });
 }
+
