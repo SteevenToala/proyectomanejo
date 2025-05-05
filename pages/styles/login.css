@@ -134,7 +134,10 @@ form {
   cursor: pointer;
   border: none;
 }
-
+.btn-password {
+  width: 30%;    
+  
+}
 .btn-block {
   background: var(--primary-color);
   color: var(--white);
