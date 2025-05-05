@@ -82,7 +82,6 @@ Los usuarios pueden registrarse y enviar una solicitud para participar en el eve
 La base de datos debe incluir como mínimo las siguientes tablas:
 - **usuarios** (con roles: admin, cliente)
 - **solicitudes** (estado, fecha, id_usuario)
-- **eventos** (único evento del sistema)
 
 ---
 
