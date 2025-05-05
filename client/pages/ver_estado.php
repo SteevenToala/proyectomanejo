@@ -6,7 +6,9 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: /proyectomanejo/pages/login.php");
     exit();
 }
+$usuario_id = $_SESSION['user_id'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
