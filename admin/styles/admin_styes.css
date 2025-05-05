@@ -1,394 +1,120 @@
-/* ===== VARIABLES GLOBALES ===== */
 :root {
-  --primary: #9c27b0;
-  --primary-hover: #ba68c8;
-  --secondary: #00bcd4;
+  --primary: #4a474b;
+  --primary-hover: #5d595e;
+  --secondary: #1ecee5;
   --dark: #121212;
   --light: #ffffff;
-  --glass: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.25);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
 
-/* ===== RESET Y ESTILOS BASE ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===== FONDO GLOBAL (REEMPLAZA BODY) ===== */
+.background {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGJsdXUlMjBjb3ZlcnxlbnwwfHx8fDE2OTI5NTY1NzE&ixlib=rb-4.0.3&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* ===== BODY ===== */
 body {
   margin: 0;
-  padding-top: 80px;
-  background: linear-gradient(135deg, 
-              rgba(0, 0, 0, 0.85), 
-              rgba(0, 0, 0, 0.95)),
-              url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920') center/cover fixed no-repeat;
-  color: var(--light);
+  padding: 0;
   font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
+  color: var(--light);
   overflow-x: hidden;
 }
 
-/* ===== NAVBAR FUTURISTA ===== */
+/* ===== NAVBAR (menos transparente) ===== */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--glass-border);
-  padding: 0.8rem 2rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  transition: var(--transition);
+  background-color: rgba(0, 0, 0, 0) !important;
+  backdrop-filter: blur(6px);
 }
 
-.navbar.scrolled {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem 2rem;
-}
-
-.navbar-brand {
-  font-weight: 700;
-  font-size: 1.5rem;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* ===== PERFIL/USUARIO ===== */
+.profile-img {
   display: flex;
   align-items: center;
-}
-
-.navbar-brand i {
-  margin-right: 10px;
-  font-size: 1.8rem;
-}
-
-.nav-link {
-  color: var(--light) !important;
-  font-weight: 500;
-  margin: 0 0.5rem;
-  padding: 0.5rem 1rem !important;
-  border-radius: 8px;
-  transition: var(--transition);
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--primary) !important;
-  transform: translateY(-2px);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: var(--transition);
-}
-
-.nav-link:hover::after {
-  width: 70%;
-}
-
-/* ===== PROFILE IMAGE CON EFECTO NEÓN ===== */
-.profile-img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
   cursor: pointer;
-  object-fit: cover;
-  border: 2px solid transparent;
   transition: var(--transition);
-  box-shadow: 0 0 10px rgba(156, 39, 176, 0);
 }
 
-.profile-img:hover {
-  border-color: var(--primary);
-  box-shadow: 0 0 15px var(--primary);
-  transform: scale(1.1);
-}
-
-/* ===== DROPDOWN MENU ESTILIZADO ===== */
 .dropdown-menu {
-  background: rgba(30, 30, 30, 0.95);
+  background: rgba(6, 6, 6, 0.441);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--glass-shadow);
-  padding: 0.5rem 0;
-  margin-top: 10px !important;
+  border-radius: 8px;
 }
 
 .dropdown-item {
-  color: var(--light);
-  padding: 0.5rem 1.5rem;
-  transition: var(--transition);
+  color: rgba(0, 0, 0, 0.16);
 }
 
 .dropdown-item:hover {
-  background: rgba(156, 39, 176, 0.2);
-  color: var(--primary);
-  transform: translateX(5px);
+  background: rgba(255, 254, 255, 0.029);
 }
 
-.dropdown-divider {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* ===== CONTENEDOR PRINCIPAL CON GLASSMORPHISM ===== */
-.bg-white {
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  color: var(--light);
-  padding: 2rem;
-  transition: var(--transition);
-  margin-bottom: 2rem;
-}
-
-.bg-white:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* ===== BOTÓN CUSTOM CON EFECTO NEÓN ===== */
-.btn-custom {
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 0.8rem 1.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
-}
-
-.btn-custom::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, var(--secondary), var(--primary));
-  z-index: -1;
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.btn-custom:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.6);
-}
-
-.btn-custom:hover::before {
-  opacity: 1;
-}
-
-/* ===== TARJETA DE SOLICITUD CON EFECTO 3D ===== */
-.card-solicitud {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--dark);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transition: var(--transition);
-  border: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-solicitud::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary));
-  transition: var(--transition);
-}
-
-.card-solicitud:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-}
-
-.card-solicitud:hover::before {
-  width: 8px;
-}
-
-/* ===== LISTA CON EFECTO DE LUZ ===== */
+/* ===== TITULO CENTRADO ("Lista de Solicitudes") ===== */
 .lista {
-  background: linear-gradient(90deg, 
-              rgba(156, 39, 176, 0.2), 
-              rgba(0, 188, 212, 0.2));
-  padding: 1.2rem 2rem;
-  border-left: 6px solid var(--primary);
-  border-radius: 16px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  color: var(--light);
-  margin-bottom: 2rem;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  text-align: center;
 }
 
-.lista::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: rotate(30deg);
-  transition: var(--transition);
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.container {
+  max-width: 1200px;
 }
 
-.lista:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+.bg-white {
+  background-color: rgb(255, 255, 255) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  color: white;
+  border: 1px solid rgb(255, 250, 250);
 }
 
-.lista:hover::after {
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { transform: rotate(30deg) translate(-30%, -30%); }
-  100% { transform: rotate(30deg) translate(30%, 30%); }
-}
-
-.lista h5 {
-  font-weight: 700;
-  margin: 0;
-  font-size: 1.4rem;
-  letter-spacing: 0.5px;
-}
-
-/* ===== EFECTO DE PARTICULAS (OPCIONAL) ===== */
-.particles {
+/* ===== LOGO SUPERIOR IZQUIERDO ===== */
+.fixed-n {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
+  top: 20px;
+  left: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: 1001;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 992px) {
-  .navbar {
-    padding: 0.8rem 1rem;
-  }
-  
-  .nav-link {
-    margin: 0.3rem 0;
-    padding: 0.8rem 1rem !important;
-  }
-  
-  .bg-white {
-    padding: 1.5rem;
-  }
+/* ===== SPINNER ===== */
+.loading-spinner {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border: 0.3rem solid rgba(255, 255, 255, 0.1);
+  border-top: 0.3rem solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  body {
-    padding-top: 70px;
+  .fixed-n {
+    font-size: 1.4rem;
+    top: 15px;
+    left: 15px;
   }
-  
-  .navbar-brand {
-    font-size: 1.3rem;
-  }
-  
-  .btn-custom {
-    padding: 0.7rem 1.5rem;
-  }
-  
-  .card-solicitud {
-    padding: 1.2rem;
-  }
-  
+
   .lista {
-    padding: 1rem 1.5rem;
+    margin-top: 5rem !important;
   }
-}
-
-@media (max-width: 576px) {
-  .navbar {
-    padding: 0.6rem 0.8rem;
-  }
-  
-  .profile-img {
-    width: 38px;
-    height: 38px;
-  }
-  
-  .bg-white {
-    padding: 1.2rem;
-    border-radius: 14px;
-  }
-  
-  .lista h5 {
-    font-size: 1.2rem;
-  }
-}
-
-/* ===== ANIMACIONES ===== */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.floating {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* ===== SCROLLBAR PERSONALIZADA ===== */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--primary), var(--secondary));
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
 }
