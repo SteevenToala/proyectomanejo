@@ -10,7 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmar_contrasena = $_POST['confirmar_contrasena'];
     
     // Validaciones básicas
-    if ($contrasena !== $confirmar_contrasena) {
+    if (strlen($contrasena) < 8) {
+        $error = "La contraseña debe tener al menos 8 caracteres.";
+    } elseif ($contrasena !== $confirmar_contrasena) {
         $error = "Las contraseñas no coinciden";
     } else {
         // Verificar si el correo ya existe
@@ -132,9 +134,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-group py-1 pb-2">
             <div class="input-field">
                 <span class="fas fa-lock p-2"></span>
-                <input type="password" name="contrasena" placeholder="Contraseña" required class="">
+                <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required class="">
                 <span class="fas fa-eye p-2" onclick="togglePassword('contrasena')" style="cursor: pointer;"></span>
             </div>
+            <small id="mensaje-contrasena" class="form-text text-danger d-none">La contraseña debe tener al menos 8 caracteres.</small>
         </div>
         <div class="form-group py-1 pb-2">
             <div class="input-field">
@@ -147,6 +150,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="text-center pt-3 text-muted">¿Ya tienes una cuenta? <a href="login.php">Inicia Sesión</a></div>
     </form>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById("contrasena");
+    const mensaje = document.getElementById("mensaje-contrasena");
+
+    passwordInput.addEventListener("input", function () {
+        if (passwordInput.value.length < 8) {
+            mensaje.classList.remove("d-none");
+        } else {
+            mensaje.classList.add("d-none");
+        }
+    });
+});
+</script>
 
 <script>
 function togglePassword(fieldId) {
